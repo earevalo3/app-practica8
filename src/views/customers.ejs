@@ -1,0 +1,77 @@
+<% include partials/_header %>
+<style>
+  .action {
+    width: 9rem;
+    margin-bottom: 5px;
+  }
+</style>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-7">
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <td>n°</td>
+            <td>Nombre</td>
+            <td>Dirección</td>
+            <td>Teléfono</td>
+            <td>Acciones</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (data) { %> <% for(var i = 0; i < data.length; i++) { %>
+          <tr>
+            <td><%= (i + 1) %></td>
+            <td><%= data[i].name %></td>
+            <td><%= data[i].address %></td>
+            <td><%= data[i].phone %></td>
+            <td>
+              <a href="/update/<%= data[i].id %>" class="action btn btn-info"
+                >Editar</a
+              >
+              <a href="/delete/<%= data[i].id %>" class="action btn btn-danger"
+                >Eliminar</a
+              >
+            </td>
+          </tr>
+          <% } %> <% } %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+        <form action="/add" method="POST">
+          <div class="form-group">
+            <input
+              type="text"
+              name="name"
+              placeholder="Nombre"
+              class="form-control"
+              autofocus
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="address"
+              placeholder="Dirección"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              name="phone"
+              placeholder="Teléfono"
+              class="form-control"
+              type="number"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include partials/_footer %>
